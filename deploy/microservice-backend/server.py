@@ -3,11 +3,14 @@ import json
 
 import numpy as np
 from flask import Flask, request
+from flask_cors import CORS
 from model_utils import CycleTransformer, load_model_pipeline
 
-MODEL_PATH = "../models/random_forest_model.joblib"
+MODEL_PATH = "../../models/random_forest_model.joblib"
 
 app = Flask(__name__)
+CORS(app)
+
 model = load_model_pipeline(MODEL_PATH)
 
 
@@ -34,4 +37,4 @@ def predict():
 
 if __name__ == '__main__':
     # Load the model
-    app.run(port=6000, debug=True)
+    app.run(port=8020, debug=True)
