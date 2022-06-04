@@ -6,7 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import { useState } from "react";
 
-const InputDateForm = ({ getPrediction }) => {
+const InputDateForm = ({ getPredictions }) => {
   const [date, setDate] = useState(new Date());
 
   function handleSubmit() {
@@ -18,7 +18,7 @@ const InputDateForm = ({ getPrediction }) => {
 
     console.log(predictionDate);
 
-    getPrediction(predictionDate);
+    getPredictions(predictionDate);
   }
 
   return (
