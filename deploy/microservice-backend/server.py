@@ -7,19 +7,18 @@ from flask_cors import CORS
 from model_utils import CycleTransformer, load_model_pipeline
 
 NUM_DAYS = 14
-MODEL_PATH = "../../models/random_forest_model.joblib"
+MODEL_PATH = "../../models/"
 
 app = Flask(__name__)
 CORS(app)
-
-model = load_model_pipeline(MODEL_PATH)
 
 
 @app.route('/api', methods=['POST'])
 def predict():
     # Get the data from the POST request.
     data = request.get_json(force=True)
-
+    path = data['path']
+    model = load_model_pipeline(MODEL_PATH+path)
     # Crete 14 dates from date passed by user
     base = datetime.datetime(data['year'], data['month'], data['day'])
     date_list = [base + datetime.timedelta(days=x) for x in range(14)]
