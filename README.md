@@ -4,4 +4,10 @@
 
 ## Deploy requirements
 
+Using pip
+
 `pip install -r deploy_requirements.txt`
+
+Using conda
+
+`conda install --file deploy_requirements.txt`
