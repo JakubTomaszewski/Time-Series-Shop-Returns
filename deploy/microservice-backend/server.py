@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 forest_model = load_model_pipeline(RANDOM_FOREST_MODEL_PATH)
-# regression_model = load_model_pipeline(LINEAR_REGRESSION_MODEL_PATH)
+regression_model = load_model_pipeline(LINEAR_REGRESSION_MODEL_PATH)
 
 
 @app.route('/api/forest', methods=['POST'])
@@ -51,7 +51,7 @@ def predict_regression():
         [[date.day, date.month, date.year] for date in date_list])
 
     # Make prediction using model loaded from disk
-    predictions = forest_model.predict(date_list_prepared)
+    predictions = regression_model.predict(date_list_prepared)
 
     # Jsonify predictions
     js = {}
