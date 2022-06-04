@@ -6,6 +6,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from model_utils import CycleTransformer, load_model_pipeline
 
+NUM_DAYS = 14
 MODEL_PATH = "../../models/random_forest_model.joblib"
 
 app = Flask(__name__)
@@ -21,15 +22,18 @@ def predict():
 
     # Crete 14 dates from date passed by user
     base = datetime.datetime(data['year'], data['month'], data['day'])
-    date_list = [base - datetime.timedelta(days=x) for x in range(14)]
+    date_list = [base + datetime.timedelta(days=x) for x in range(14)]
     date_list_prepared = np.array(
         [[date.day, date.month, date.year] for date in date_list])
 
-    # Make prediction using model loaded from disk as per the data.
+    # Make prediction using model loaded from disk
     predictions = model.predict(date_list_prepared)
 
     # Jsonify predictions
-    js = {"predictions": list(predictions)}
+    js = {}
+    for date, prediction in zip(date_list, predictions):
+        js[date.strftime("%m/%d/%Y")] = prediction
+
     json_object = json.dumps(js, indent=4)
     # return json response
     return json_object
