@@ -67,14 +67,12 @@ def predict():
     data = request.get_json(force=True)
     # Crete 14 dates from date passed by user
     base = datetime.datetime(data['year'], data['month'], data['day'])
-    date_list = [base - datetime.timedelta(days=x) for x in range(14)]
+    date_list = [base + datetime.timedelta(days=x) for x in range(14)]
     # Make prediction using model loaded from disk as per the data.
-    predictions = []
+    js = {}
     for date in date_list:
-        predictions.append(model.predict(np.array([[date.day, date.month, date.year]]))[0])
+        js[date.strftime("%m/%d/%Y")] = model.predict(np.array([[date.day, date.month, date.year]]))[0]
     # Jsonify predictions
-    js = {"predictions": predictions}
-    print(js)
     json_object = json.dumps(js, indent=4)
     # return json response
     return json_object
