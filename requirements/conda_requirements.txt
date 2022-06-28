@@ -1,0 +1,9 @@
+flask=2.1.2=pyhd8ed1ab_1
+flask-cors=3.0.10=pypi_0
+matplotlib=3.5.2=py38h150bfb4_0
+numpy=1.22.4=pypi_0
+pandas=1.4.2=py38h6724fcd_2
+plotly=5.8.0=pyhd8ed1ab_1
+pycaret=2.3.10=pypi_0
+scikit-learn=0.23.2=py38h397cc00_3
+seaborn=0.11.2=hd8ed1ab_0
