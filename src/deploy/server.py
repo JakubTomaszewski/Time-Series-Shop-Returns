@@ -1,3 +1,4 @@
+import os
 import datetime
 import json
 
@@ -6,15 +7,21 @@ from flask import Flask, request
 from flask_cors import CORS
 from model_utils import CycleTransformer, load_model_pipeline
 
+
 NUM_DAYS = 14
-RANDOM_FOREST_MODEL_PATH = "../../models/random_forest_model.joblib"
-LINEAR_REGRESSION_MODEL_PATH = "../../models/linear_regression_model.joblib"
+RANDOM_FOREST_MODEL_PATH = f"../../{os.environ['MODELS_DIR']}/{os.environ['RF_MODEL']}"
+LINEAR_REGRESSION_MODEL_PATH = f"../../{os.environ['MODELS_DIR']}/{os.environ['LR_MODEL']}"
 
 app = Flask(__name__)
 CORS(app)
 
 forest_model = load_model_pipeline(RANDOM_FOREST_MODEL_PATH)
 regression_model = load_model_pipeline(LINEAR_REGRESSION_MODEL_PATH)
+
+
+@app.route('/')
+def home():
+    return "Returns Prediction App"
 
 
 @app.route('/api/forest', methods=['POST'])
@@ -65,4 +72,4 @@ def predict_regression():
 
 if __name__ == '__main__':
     # Load the model
-    app.run(port=8020, debug=True)
+    app.run(host="0.0.0.0", port=8020, debug=True)
