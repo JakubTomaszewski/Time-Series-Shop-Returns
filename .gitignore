@@ -1,3 +1,4 @@
 Projekt_IUM*
 .ipynb_checkpoints/
 *.log
+.DS_Store

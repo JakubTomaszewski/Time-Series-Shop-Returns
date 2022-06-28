@@ -1,0 +1,15 @@
+FROM node:18-alpine
+
+LABEL version=1.0
+LABEL author="jtomasz"
+
+ENV APP_DIR=src/frontend-app
+
+COPY ${APP_DIR} src/frontend-app  
+WORKDIR ${APP_DIR}
+
+# Installing packages
+RUN npm install
+
+# Launching the app
+ENTRYPOINT [ "npm", "start" ]

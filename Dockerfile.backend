@@ -1,0 +1,24 @@
+ARG PYTHON_VERSION=3.8
+FROM python:${PYTHON_VERSION}
+
+LABEL version=1.0
+LABEL author="jtomasz"
+
+ENV MODELS_DIR=/models
+ENV LR_MODEL=linear_regression_model.joblib
+ENV RF_MODEL=random_forest_model.joblib
+ENV REQUIREMENTS_DIR=/requirements
+ENV APP_DIR=src/deploy
+
+# Preparing directories
+COPY ${REQUIREMENTS_DIR}/deploy_requirements.txt .
+COPY ${MODELS_DIR} ./models
+COPY ${APP_DIR} ./src/deploy
+
+# Installing packages
+RUN pip install -r deploy_requirements.txt
+
+# Launching the app
+WORKDIR ${APP_DIR}
+
+ENTRYPOINT [ "python3", "server.py" ]

@@ -1,0 +1,9 @@
+*/docs
+*/data
+*.ipynb
+*.DS_Store
+*.pdf
+*/node_modules
+*/.git
+.dockerignore
+*.log
