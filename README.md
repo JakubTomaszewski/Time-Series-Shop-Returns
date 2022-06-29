@@ -86,8 +86,8 @@ $ pip install -r requirements/pip_requirements.txt
 ## Launching the app
 
 In order to launch the whole app use docker-compose. After running the command below, two containers will be created, one with the backend app and the other with the frontend app.
-- [Frontend](localhost:3000)
-- [Backend](localhost:8020)
+- [Frontend](https://localhost:3000)
+- [Backend](https://localhost:8020)
 
 ```shell
 $ docker-compose up
