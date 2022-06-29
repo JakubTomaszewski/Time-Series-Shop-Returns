@@ -2,29 +2,23 @@
 
 ## About the project
 
-Some part of the project has been created for a Computer Science course at my University (Warsaw University of Technology). After passing the semester I have decided to develop the project more, by testing more models, adding new features, and deploying them with `Docker`.
+Some part of the project has been created for a Computer Science course at my University (Warsaw University of Technology). After passing the semester I have decided to further develop the project, by testing more models, adding new features, and deploying them with `Docker`.
 
 ---
 
 ## Project description
 
-W ramach projektu wcielamy się w rolę analityka pracującego w firmie „eSzoppping” 
-– sklepu internetowego z akcesoriami komputerowymi. Praca na tym stanowisku nie jest łatwa – 
-zadanie dostajemy w formie enigmatycznego opisu i to do nas należy doprecyzowanie szczegółów 
-tak, aby dało się je zrealizować. To oczywiście wymaga zrozumienia problemu, przeanalizowania 
-danych, czasami negocjacji z szefostwem. Oprócz analiz i wytrenowania modeli, musimy 
-przygotować  je do wdrożenia produkcyjnego –  zakładając, że w przyszłości będą pojawiać się 
-kolejne ich wersje, z którymi będziemy eksperymentować. 
-Jak każda szanująca się firma internetowa, eSzoppping zbiera dane dotyczące swojej działalności – 
-są to: 
-• baza użytkowników, 
-• katalog produktów, 
-• historia sesji użytkowników, 
-• dane dotyczące wysyłki zakupionych produktów.
+### Context
+*An online computer shop called "eSzoppping" is our client. The shop warehouse workers are struggling with organising and processing order returns, as they don't know how many packages to expect.*
 
-„Chyba w lepszy sposób musimy zacząć obsługiwać zwroty zakupionych u nas towarów. 
-Konsultanci narzekają, że nie są w stanie tego inaczej zorganizować w magazynie nie mając 
-pojęcia ilu takich przypadków mogą się spodziewać – trzeba im jakoś pomóc.”
+### Task
+*The goal of this project is to create a model, which will support the warehouse workers by predicting the number of returned orders for the next 14 days.*
+
+### Data available:
+> - users
+> - products
+> - user session data
+> - parcel deliveries data
 
 ---
 
@@ -42,6 +36,7 @@ pojęcia ilu takich przypadków mogą się spodziewać – trzeba im jakoś pom�
 - Perform A/B Tests
 
 ---
+
 
 ## Technologies
 
@@ -90,22 +85,49 @@ $ pip install -r requirements/pip_requirements.txt
 
 ## Launching the app
 
-In order to deploy the model microservice run the following command
+In order to launch the whole app use docker-compose. After running the command below, two containers will be created, one with the backend app and the other with the frontend app.
+- [Frontend](localhost:3000)
+- [Backend](localhost:8020)
 
 ```shell
-$ docker run -dp 8020:8020 --name returns-prediction-app jtomasz/returns-prediction-app:backend
+$ docker-compose up
 ```
 
-You can also pull the container from DockerHub manually
+---
+
+To deploy only the model microservice run the following command
+
+```shell
+$ docker run -dp 8020:8020 --name returns-prediction-app-backend jtomasz/returns-prediction-app:backend
+```
+
+---
+
+To run only the frontend app execute the command below
+
+```shell
+$ docker run -dp 3000:3000 --name returns-prediction-app-frontend jtomasz/returns-prediction-app:frontend
+```
+
+---
+
+You can also pull the containers from DockerHub manually
 
 ```shell
 $ docker pull jtomasz/returns-prediction-app:backend
 ```
 
+```shell
+$ docker pull jtomasz/returns-prediction-app:frontend
+```
+
 Or build the image by yourself
 
 ```shell
-$ docker build -t returns-prediction-app -f Dockerfile_backend .
+$ docker build -t jtomasz/returns-prediction-app:backend -f Dockerfile.backend .
 ```
 
+```shell
+$ docker build -t jtomasz/returns-prediction-app:frontend -f Dockerfile.frontend .
+```
 
