@@ -3,19 +3,19 @@ name: Push Docker image with a deployed model backend app
 on:
   [push]
   
-  jobs:
-    build_backend_docker_image:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - name: Log into DockerHub
-          env: 
-            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        
-        - name: Build Docker image
-          run: docker build -t jtomasz/returns-prediction-app:backend -f Dockerfile.backend .
-        
-        - name: Push Docker image to DockerHub
-          run: docker push jtomasz/returns-prediction-app:backend
+jobs:
+  build_backend_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log into DockerHub
+        env: 
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Build Docker image
+        run: docker build -t jtomasz/returns-prediction-app:backend -f Dockerfile.backend .
+
+      - name: Push Docker image to DockerHub
+        run: docker push jtomasz/returns-prediction-app:backend
