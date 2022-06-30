@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "Signing into DockerHub"
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          echo "Signed in successfully
+          echo "Signed in successfully"
 
       - name: Build Docker image
         run: | 
