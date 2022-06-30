@@ -27,7 +27,7 @@ jobs:
           echo "Image build successfully"
 
       - name: Push Docker image to DockerHub
-        run |
+        run: |
           echo "Pushing image do DockerHub"
           docker push jtomasz/returns-prediction-app:backend
           echo "Image pushed successfully"
