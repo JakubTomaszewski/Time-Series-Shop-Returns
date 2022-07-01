@@ -26,6 +26,14 @@ jobs:
           docker build -t jtomasz/returns-prediction-app:backend -f Dockerfile.backend .
           echo "Image built successfully"
 
+      - name: Run Docker image
+        run: |
+          echo "Starting docker container"
+          docker run -dp 8020:8020 --name returns-prediction-app-backend jtomasz/returns-prediction-app:backend
+          echo "Docker container started successfully"
+          docker stop returns-prediction-app-backend
+          echo "Docker container stopped successfully"
+
       - name: Push Docker image to DockerHub
         run: |
           echo "Pushing image do DockerHub"
