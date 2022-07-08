@@ -55,6 +55,7 @@ Some part of the project has been created for a Computer Science course at my Un
 ![React JS](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
 
 ---
@@ -86,8 +87,8 @@ $ pip install -r requirements/pip_requirements.txt
 ## Launching the app
 
 In order to launch the whole app use docker-compose. After running the command below, two containers will be created, one with the backend app and the other with the frontend app.
-- [Frontend](localhost:3000)
-- [Backend](localhost:8020)
+- [Frontend](https://localhost:3000)
+- [Backend](https://localhost:8020)
 
 ```shell
 $ docker-compose up
