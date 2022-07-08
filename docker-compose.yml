@@ -2,11 +2,11 @@ version: '2.6'
 
 services:
   backend-app:
-    image: jtomasz/returns-prediction-app:backend
+    image: jtomasz/returns-prediction-app-backend
     ports:
       - 8020:8020
   frontend-app:
-    image: jtomasz/returns-prediction-app:frontend
+    image: jtomasz/returns-prediction-app-frontend
     ports:
       - "3000:3000"
     depends_on:

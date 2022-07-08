@@ -98,7 +98,7 @@ $ docker-compose up
 To deploy only the model microservice run the following command
 
 ```shell
-$ docker run -dp 8020:8020 --name returns-prediction-app-backend jtomasz/returns-prediction-app:backend
+$ docker run -dp 8020:8020 --name returns-prediction-app-backend jtomasz/returns-prediction-app-backend
 ```
 
 ---
@@ -106,7 +106,7 @@ $ docker run -dp 8020:8020 --name returns-prediction-app-backend jtomasz/returns
 To run only the frontend app execute the command below
 
 ```shell
-$ docker run -dp 3000:3000 --name returns-prediction-app-frontend jtomasz/returns-prediction-app:frontend
+$ docker run -dp 3000:3000 --name returns-prediction-app-frontend jtomasz/returns-prediction-app-frontend
 ```
 
 ---
@@ -114,20 +114,20 @@ $ docker run -dp 3000:3000 --name returns-prediction-app-frontend jtomasz/return
 You can also pull the containers from DockerHub manually
 
 ```shell
-$ docker pull jtomasz/returns-prediction-app:backend
+$ docker pull jtomasz/returns-prediction-app-backend
 ```
 
 ```shell
-$ docker pull jtomasz/returns-prediction-app:frontend
+$ docker pull jtomasz/returns-prediction-app-frontend
 ```
 
 Or build the image by yourself
 
 ```shell
-$ docker build -t jtomasz/returns-prediction-app:backend -f Dockerfile.backend .
+$ docker build -t jtomasz/returns-prediction-app-backend -f Dockerfile.backend .
 ```
 
 ```shell
-$ docker build -t jtomasz/returns-prediction-app:frontend -f Dockerfile.frontend .
+$ docker build -t jtomasz/returns-prediction-app-frontend -f Dockerfile.frontend .
 ```
 
