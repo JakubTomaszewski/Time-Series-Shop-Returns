@@ -1,7 +1,14 @@
 name: Push Docker image with a deployed model backend app
 
 on:
-  [push]
+  push:
+    paths:
+      - "models"
+      - "src/deploy"
+      - "src/frontend-app"
+      - "requirements/"
+      - "Dockerfile.backend"
+      - "Dockerfile.frontend"
 
 env: 
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
