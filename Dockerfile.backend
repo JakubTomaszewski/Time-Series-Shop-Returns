@@ -10,15 +10,21 @@ ENV RF_MODEL=random_forest_model.joblib
 ENV REQUIREMENTS_DIR=/requirements
 ENV APP_DIR=src/deploy
 
+RUN groupadd -r backend_app_user && useradd -r -g backend_app_user backend_app_user
+
 # Preparing directories
 COPY ${REQUIREMENTS_DIR}/deploy_requirements.txt .
-COPY ${MODELS_DIR} ./models
-COPY ${APP_DIR} ./src/deploy
 
 # Installing packages
 RUN pip install -r deploy_requirements.txt
 
+COPY ${MODELS_DIR} ./models
+COPY ${APP_DIR} ./src/deploy
+
 # Launching the app
 WORKDIR ${APP_DIR}
 
-ENTRYPOINT [ "python3", "server.py" ]
+USER backend_app_user
+
+ENTRYPOINT [ "python3" ]
+CMD [ "server.py" ]

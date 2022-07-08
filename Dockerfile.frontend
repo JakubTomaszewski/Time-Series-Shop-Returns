@@ -5,11 +5,16 @@ LABEL author="jtomasz"
 
 ENV APP_DIR=src/frontend-app
 
-COPY ${APP_DIR} src/frontend-app  
-WORKDIR ${APP_DIR}
+COPY ${APP_DIR}/package.json app/
+
+WORKDIR /app/
 
 # Installing packages
 RUN npm install
 
+COPY ${APP_DIR}/public/ public/
+COPY ${APP_DIR}/src/ src/
+
 # Launching the app
-ENTRYPOINT [ "npm", "start" ]
+ENTRYPOINT [ "npm" ]
+CMD [ "start" ]
