@@ -1,0 +1,74 @@
+name: Push Docker image with a deployed model backend app
+
+on:
+  push:
+    paths:
+      - "models"
+      - "src/deploy"
+      - "src/frontend-app"
+      - "requirements/"
+      - "Dockerfile.backend"
+      - "Dockerfile.frontend"
+
+env: 
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+jobs:
+  build_backend_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Start
+        run: echo "Backend image"
+      - name: Log into DockerHub
+        run: |
+          echo "Signing into DockerHub"
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo "Signed in successfully"
+
+      - name: Build Docker image
+        run: | 
+          echo "Building the image..."
+          docker build -t jtomasz/returns-prediction-app:backend -f Dockerfile.backend .
+          echo "Image built successfully"
+
+      - name: Run Docker image
+        run: |
+          echo "Starting docker container"
+          docker run -dp 8020:8020 --name returns-prediction-app-backend jtomasz/returns-prediction-app:backend
+          echo "Docker container started successfully"
+          docker stop returns-prediction-app-backend
+          echo "Docker container stopped successfully"
+
+      - name: Push Docker image to DockerHub
+        run: |
+          echo "Pushing image do DockerHub"
+          docker push jtomasz/returns-prediction-app:backend
+          echo "Image pushed successfully"
+
+
+  build_frontend_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Start
+        run: echo "Frontend image"
+      
+      - name: Log into DockerHub
+        run: |
+          echo "Signing into DockerHub"
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo "Signed in successfully"
+      
+      - name: Build Docker image
+        run: |
+          echo "Building the image..."
+          docker build -t jtomasz/returns-prediction-app:frontend -f Dockerfile.frontend .
+          echo "Image built successfully"
+      
+      - name: Push Docker image to Dockerhub
+        run: |
+          echo "Pushing image do DockerHub"
+          docker push jtomasz/returns-prediction-app:frontend
+          echo "Image pushed successfully"

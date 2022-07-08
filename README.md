@@ -2,7 +2,7 @@
 
 ## About the project
 
-Some part of the project has been created for a Computer Science course at my University (Warsaw University of Technology). After passing the semester I have decided to further develop the project, by testing more models, adding new features, and deploying them with `Docker`.
+Some part of the project has been created for a Computer Science course at my University (Warsaw University of Technology). After passing the semester I have decided to further develop the project, by testing more models, adding new features, deploying them with `Docker` and automatically pushing created images to DockerHub using GitHub Actions.
 
 ---
 
